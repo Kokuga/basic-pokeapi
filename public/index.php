@@ -8,4 +8,4 @@
 
     header('Content-Type: application/json');
 
-    echo json_encode($pokedex->getCleanPokemon());
+    echo json_encode($pokedex->getAllPokemons('offset=0&limit=20'));

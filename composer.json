@@ -1,0 +1,19 @@
+{
+    "name": "kokuga/basic-pokeapi",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Kokuga\\BasicPokeapi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kokuga",
+            "email": "damien.mizzi@live.fr"
+        }
+    ],
+    "require": {
+        "symfony/http-client": "^5.3"
+    }
+}

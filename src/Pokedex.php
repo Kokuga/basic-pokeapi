@@ -16,12 +16,16 @@
             $this->client = HttpClient::createForBaseUri('https://pokeapi.co/api/v2/');
         }
 
-        public function getAllPokemons(string $offset, array $array = [])
+        public function getAllPokemons(int $offset = 0, int $limit = 20,  array $array = []): array
         {
-            $response = $this->client->request('GET', 'pokemon?' . $offset);
+            $response = $this->client->request('GET', 'pokemon?offset=' . $offset . '&limit=' .$limit);
             $data = $response->toArray();
             $next = $data['next'];
-            $nextExploded = explode('?', $next);
+            if($next != NULL) {
+                $limitExploded = explode('=', $next);
+                $offsetExploded = explode('&', $limitExploded[1]);
+            }
+
             $pokemons = $array;
             foreach ($data['results'] as $key) {
                 $name = $key['name'];
@@ -32,7 +36,7 @@
             if ($next == null) {
                 return $pokemons;
             } else {
-                return $this->getAllPokemons($nextExploded[1], $pokemons);
+                return $this->getAllPokemons($offsetExploded[0],$limitExploded[2], $pokemons);
             }
         }
 
